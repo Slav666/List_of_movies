@@ -7,7 +7,7 @@ class Movies extends Component {
         return ( 
             <React.Fragment>
              <h1>List of Movies</h1>
-                <table class="table table-dark">
+                <table className="table table-dark">
                     <thead>
                         <tr style={{color: 'blue'}}>
                             <th scope="col">Title</th>
