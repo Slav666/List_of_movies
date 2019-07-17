@@ -16,18 +16,20 @@ class Movies extends Component {
 
     handleDelete = movie => {
         const movies = this.state.movies.filter(m => m._id !== movie._id)
-        this.setState({movies})
+        this.setState({movies});
     }
 
     handleGenreSelect = genre => {
-        console.log(genre);
+        this.setState({selectedGenre: genre});
     }
 
     render() { 
         return ( 
             <div className="row">
                 <div className="col-3">
-                    <ListGroup items={this.state.genres} onItemSelect={this.handleGenreSelect} />
+                    <ListGroup items={this.state.genres}
+                     onItemSelect={this.handleGenreSelect} 
+                     selectedItem={this.state.selectedGenre}/>
                 </div>
                 <div className="col">
                     <h1>List of Movies</h1>
