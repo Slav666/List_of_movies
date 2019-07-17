@@ -12,7 +12,7 @@ class Movies extends Component {
              <h1>List of Movies</h1>
                 <table className="table table-dark">
                     <thead>
-                        <tr style={{color: 'blue'}}>
+                        <tr >
                             <th scope="col">Title</th>
                             <th scope="col">Genre</th>
                             <th scope="col">Stock</th>
@@ -26,6 +26,11 @@ class Movies extends Component {
                             <td>{movie.genre.name}</td>
                             <td>{movie.numberInStock}</td>
                             <td>{movie.dailyRentalRate}</td>
+                            <td>
+                                <button className="btn btn-danger"> 
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                         ))}
                         
