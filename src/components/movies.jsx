@@ -26,7 +26,7 @@ class Movies extends Component {
     render() { 
         return ( 
             <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                     <ListGroup items={this.state.genres} onItemSelect={this.handleGenreSelect}/>
                 </div>
                 <div className="col">
