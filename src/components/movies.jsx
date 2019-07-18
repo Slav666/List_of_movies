@@ -8,7 +8,8 @@ class Movies extends Component {
     state = {
         movies: [],
         genres: [],
-        pageSize: 4
+        pageSize: 4,
+        currentPage: 1
         
     }
 
@@ -25,7 +26,7 @@ class Movies extends Component {
         this.setState({selectedGenre: genre});
     }
     handlePageChange = (page) => {
-        console.log(page)
+        this.setState({currentPage: page});
     }
     render() { 
         if( this.state.movies.length === 0) return <p>There are no movies in the database.</p>;
@@ -66,7 +67,12 @@ class Movies extends Component {
                         
                         </tbody>
                     </table>
-                    <Pagination itemCount={this.state.movies.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
+                    <Pagination 
+                    itemCount={this.state.movies.length} 
+                    pageSize={this.state.pageSize} 
+                    onPageChange={this.handlePageChange}
+                    currentPage={this.state.currentPage}
+                    />
                 </div>
             </div>
         );
