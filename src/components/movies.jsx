@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { getMovies} from '../services/fakeMovieService';
 import ListGroup from './listGroup';
 import { getGenres } from '../services/fakeGenreService';
-
+import Pagination from './pagination';
 class Movies extends Component {
 
     state = {
         movies: [],
-        genres: []
+        genres: [],
+        
     }
 
     componentDidMount(){
@@ -62,6 +63,7 @@ class Movies extends Component {
                         
                         </tbody>
                     </table>
+                    <Pagination itemCount={this.state.movies.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
                 </div>
             </div>
         );
