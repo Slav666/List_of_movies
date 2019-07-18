@@ -66,7 +66,7 @@ class Movies extends Component {
                         
                         </tbody>
                     </table>
-                    <Pagination itemCount={this.state.movies.length} pageSize={this.state.pageSize} onPageChange={this.handlePageChange}/>
+                    <Pagination itemCount={this.state.movies.length} pageSize={10} onPageChange={this.handlePageChange}/>
                 </div>
             </div>
         );
