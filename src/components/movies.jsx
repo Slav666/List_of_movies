@@ -3,6 +3,8 @@ import { getMovies} from '../services/fakeMovieService';
 import ListGroup from './listGroup';
 import { getGenres } from '../services/fakeGenreService';
 import Pagination from './pagination';
+
+import { paginate } from '../utils/paginate';
 class Movies extends Component {
 
     state = {
@@ -30,6 +32,7 @@ class Movies extends Component {
     }
     render() { 
         if( this.state.movies.length === 0) return <p>There are no movies in the database.</p>;
+        const movies = paginate(this.state.movies, this.state.currentPage, this.state.pageSize);
         return ( 
             <div className="row">
                 <div className="col-3" >
@@ -50,7 +53,7 @@ class Movies extends Component {
                         </tr>
                         </thead>
                         <tbody> 
-                            {this.state.movies.map(movie => (
+                            {movies.map(movie => (
                                 <tr key={movie._id}>
                                  <td>{movie.title}</td>
                                     <td>{movie.genre.name}</td>
