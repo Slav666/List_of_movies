@@ -45,7 +45,7 @@ class Movies extends Component {
                 </div>
                 <div className="col">
                     <h1>List of Movies</h1>
-                    <p>There are {count} in the database.</p>
+                    <p>There are {filtered.length} in the database.</p>
                     <table className="table table-dark">
                         <thead>
                         <tr >
