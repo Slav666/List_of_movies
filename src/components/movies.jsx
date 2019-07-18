@@ -31,18 +31,21 @@ class Movies extends Component {
         this.setState({currentPage: page});
     }
     render() { 
-        if( this.state.movies.length === 0) return <p>There are no movies in the database.</p>;
-        const movies = paginate(this.state.movies, this.state.currentPage, this.state.pageSize);
+        const {length: count} = this.state.movies
+        const {pageSize, currentPage, selectedGenre, movies: allMovies} = this.state
+
+        if( count === 0) return <p>There are no movies in the database.</p>;
+        const movies = paginate(allMovies, currentPage, pageSize);
         return ( 
             <div className="row">
                 <div className="col-3" >
                     <ListGroup items={this.state.genres}
                      onItemSelect={this.handleGenreSelect} 
-                     selectedItem={this.state.selectedGenre}/>
+                     selectedItem={selectedGenre}/>
                 </div>
                 <div className="col">
                     <h1>List of Movies</h1>
-                    <p>There are {this.state.movies.length} in the database.</p>
+                    <p>There are {count} in the database.</p>
                     <table className="table table-dark">
                         <thead>
                         <tr >
@@ -71,10 +74,10 @@ class Movies extends Component {
                         </tbody>
                     </table>
                     <Pagination 
-                    itemCount={this.state.movies.length} 
-                    pageSize={this.state.pageSize} 
+                    itemCount={count} 
+                    pageSize={pageSize} 
                     onPageChange={this.handlePageChange}
-                    currentPage={this.state.currentPage}
+                    currentPage={currentPage}
                     />
                 </div>
             </div>
