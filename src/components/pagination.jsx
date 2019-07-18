@@ -1,12 +1,15 @@
 import React from 'react';
 
 const Pagination = (props) => {
+    const {itemCount, pageSize} = props;
+    const pageCount = itemCount / pageSize;
     return (
-        <nav aria-label="Page navigation example">
-  <ul className="pagination">
-    <li className="page-item"><a className="page-link" >1</a></li>
-    </ul>
-</nav>
+    <nav>
+        <ul className="pagination">
+            <li className="page-item">
+            <a className="page-link" >{pageCount}</a></li>
+        </ul>
+    </nav>
     )
 }
  
