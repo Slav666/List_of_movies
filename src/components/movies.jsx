@@ -24,15 +24,17 @@ class Movies extends Component {
     }
 
     render() { 
+        if( this.state.movies.length === 0) return <p>There are no movies in the database.</p>;
         return ( 
             <div className="row">
-                <div className="col-3">
+                <div className="col-3" >
                     <ListGroup items={this.state.genres}
                      onItemSelect={this.handleGenreSelect} 
                      selectedItem={this.state.selectedGenre}/>
                 </div>
                 <div className="col">
                     <h1>List of Movies</h1>
+                    <p>There are {this.state.movies.length} in the database.</p>
                     <table className="table table-dark">
                         <thead>
                         <tr >
