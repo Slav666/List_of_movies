@@ -26,7 +26,7 @@ class Movies extends Component {
     }
 
     handleGenreSelect = genre => {
-        this.setState({selectedGenre: genre});
+        this.setState({selectedGenre: genre, currentPage: 1});
     }
     handlePageChange = (page) => {
         this.setState({currentPage: page});
