@@ -3,10 +3,10 @@ import { getMovies} from '../services/fakeMovieService';
 import ListGroup from './listGroup';
 import { getGenres } from '../services/fakeGenreService';
 import Pagination from './pagination';
-
-
 import { paginate } from '../utils/paginate';
-import MovieTable from '../common/movieTable';
+import MovieTable from './movieTable';
+
+
 class Movies extends Component {
 
     state = {
@@ -15,10 +15,11 @@ class Movies extends Component {
         pageSize: 4,
         currentPage: 1
         
+        
     }
 
     componentDidMount(){
-        const genres = [{_id: '', name: 'All Genres'},...getGenres()];
+        const genres = [{ _id: '', name: 'All Genres'},...getGenres()];
         this.setState({movies: getMovies(), genres});
     }
 
@@ -32,24 +33,40 @@ class Movies extends Component {
     }
     handlePageChange = (page) => {
         this.setState({currentPage: page});
+
     }
+
+    handleSort = path => {
+        console.log(path)
+    };
+    
     render() { 
         const {length: count} = this.state.movies
         const {pageSize, currentPage, selectedGenre, movies: allMovies} = this.state
         const filtered = selectedGenre && selectedGenre._id ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
+
+       
+
         if( count === 0) return <p>There are no movies in the database.</p>;
         const movies = paginate(filtered, currentPage, pageSize);
         return ( 
             <div className="row">
                 <div className="col-3" >
-                    <ListGroup items={this.state.genres}
-                     onItemSelect={this.handleGenreSelect} 
-                     selectedItem={selectedGenre}/>
+                    <ListGroup 
+                    items={this.state.genres}
+                    selectedItem={this.state.selectedGenre}
+                    onItemSelect={this.handleGenreSelect} 
+                     />
                 </div>
                 <div className="col">
                     <h1>List of Movies</h1>
                     <p>There are {filtered.length} in the database.</p>
-                    <MovieTable movies={movies} onDelete={this.handleDelete}/>
+                    <MovieTable 
+                    movies={movies} 
+                    onDelete={this.handleDelete}
+                    onSort={this.handleSort}
+                    
+                    />
                     <Pagination 
                     itemCount={filtered.length} 
                     pageSize={pageSize} 

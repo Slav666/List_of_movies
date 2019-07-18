@@ -5,7 +5,7 @@ import _ from 'lodash';
 const Pagination = (props) => {
 
     const {itemCount, pageSize, onPageChange, currentPage} = props;
-    console.log(currentPage)
+    
     const pageCount = Math.ceil(itemCount / pageSize);
     const pages = _.range(1, pageCount + 1);
 
