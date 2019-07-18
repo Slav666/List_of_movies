@@ -8,6 +8,7 @@ class Movies extends Component {
     state = {
         movies: [],
         genres: [],
+        pageSize: 4
         
     }
 
@@ -23,7 +24,9 @@ class Movies extends Component {
     handleGenreSelect = genre => {
         this.setState({selectedGenre: genre});
     }
-
+    handlePageChange = (page) => {
+        console.log(page)
+    }
     render() { 
         if( this.state.movies.length === 0) return <p>There are no movies in the database.</p>;
         return ( 
