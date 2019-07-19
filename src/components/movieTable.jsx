@@ -1,17 +1,30 @@
-import React from 'react'; 
+import React, {Component} from 'react'; 
+  
 
-const MovieTable = (props) => {
+class MovieTable extends Component {
+    
+    raiseSort = path => {
+        const sortColumn = {...this.props.sortColumn};
+        if (sortColumn.path === path)
+        sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
+        else {
+            sortColumn.path = path;
+            sortColumn.order = 'asc';
+        }
+        this.props.onSort(sortColumn);
+    };
+    render() { 
 
-    const {movies, onDelete, onSort} = props;
+        const {movies, onDelete} = this.props;
 
     return ( 
         <table className="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col" onClick={() => onSort('title')}>Title</th>
-                    <th scope="col" onClick={() => onSort('genre.name')}>Genre</th>
-                    <th scope="col" onClick={() => onSort('numberInStock')}>Stock</th>
-                    <th scope="col" onClick={() => onSort('dailyRentalRate')}>Rate</th>
+                    <th scope="col" onClick={() => this.reiseSort('title')}>Title</th>
+                    <th scope="col" onClick={() => this.reiseSort('genre.name')}>Genre</th>
+                    <th scope="col" onClick={() => this.reiseSort('numberInStock')}>Stock</th>
+                    <th scope="col" onClick={() => this.reiseSort('dailyRentalRate')}>Rate</th>
                 </tr>
             </thead>
             <tbody> 
@@ -33,6 +46,10 @@ const MovieTable = (props) => {
             </tbody>
         </table> 
     );
+    }
 }
+ 
+
+
   
 export default MovieTable;
