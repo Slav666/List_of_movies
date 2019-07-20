@@ -7,7 +7,7 @@ const Table = (props) => {
 
     const {columns, sortColumn, onSort, data} = props;
     return ( 
-        <table className="table">
+        <table className="table table-dark">
             <TableHeader 
             columns={columns} 
             sortColumn={sortColumn} 
