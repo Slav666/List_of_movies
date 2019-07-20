@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Table from './table';
 import {Link} from "react-router-dom";
 
+
 class MovieTable extends Component {
     
     columns = [
