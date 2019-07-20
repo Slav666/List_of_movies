@@ -1,9 +1,20 @@
 import React, {Component} from 'react'; 
 
 class LoginForm extends Component {
-    handlerOnSubmit = (event) =>{
+
+    state =  {
+        account: {username: '', password: ''}
+    }
+
+    handleOnSubmit = (event) =>{
         event.preventDefault();
+
         console.log("Submitted");
+    };
+    handleChange = (text) => {
+        const account = {...this.state.account}
+        account.username = text.currentTarget.value;
+        this.setState( {account} );
     };
 
 
@@ -12,9 +23,13 @@ class LoginForm extends Component {
         return ( 
             <div>
             <h1>Login</h1>
-            <form onSubmit={this.handlerOnSubmit}>
-                <div className="form-group"><label htmlFor="username">Username</label><input id="username"type="text" className="form-control"/></div>
-                <div className="form-group"><label htmlFor="password">Password</label><input id="password"type="text" className="form-control"/></div>
+            <form onSubmit={this.handleOnSubmit}>
+                <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <input value={this.state.account.username} onChange={this.handleChange} id="username"type="text" className="form-control"/></div>
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input id="password"type="text" className="form-control"/></div>
                 <button className="btn btn-primary">Login</button>
             </form>
             </div>
