@@ -21,8 +21,8 @@ class LoginForm extends Component {
         event.preventDefault();
 
         const errors = this.validate();
-        console.log(errors);
-        this.setState({errors});
+        
+        this.setState({errors: errors || {}});
         if (errors) return;
         console.log('Submitted')
         
