@@ -8,15 +8,24 @@ class LoginForm extends Component {
         errors: {}
     }
     validate = () => {
-        return {username: 'Username is required'}
+        const errors ={};
+        const {account} = this.state
+        if (account.username.trim() === '')
+        errors.username = 'Username is required'
+        if (account.password.trim() === '')
+        errors.password = 'Password is required'
+
+        return Object.keys(errors).length === 0 ? null : errors;
     };
     handleOnSubmit = (event) =>{
         event.preventDefault();
-        const errors = this.validate();
-        this.setState({errors})
-        if (errors) return;
 
-        console.log("Submitted");
+        const errors = this.validate();
+        console.log(errors);
+        this.setState({errors});
+        if (errors) return;
+        console.log('Submitted')
+        
     };
     handleChange = ({currentTarget: input}) => {
         const account = {...this.state.account}
@@ -35,13 +44,13 @@ class LoginForm extends Component {
                     <Input 
                      name="username"
                      value={account.username}
-                     label={account.username}
+                     label="Username"
                      onChange={this.handleChange}
                      />
                     <Input 
                      name="password"
                      value={account.password}
-                     label={account.password}
+                     label="Password"
                      onChange={this.handleChange}
                      />
                         
