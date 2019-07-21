@@ -1,4 +1,5 @@
 import React, {Component} from 'react'; 
+import Joi from 'joi-browser';
 import Input from './input';
 
 class LoginForm extends Component {
@@ -7,15 +8,22 @@ class LoginForm extends Component {
         account: {username: '', password: ''},
         errors: {}
     }
+    schema = {
+        username: Joi.string().required().label('Username'),
+        password: Joi.string().required().label('Password')
+    }
     validate = () => {
-        const errors ={};
-        const {account} = this.state
-        if (account.username.trim() === '')
-        errors.username = 'Username is required'
-        if (account.password.trim() === '')
-        errors.password = 'Password is required'
+        const options = {abortEarly: false};
 
-        return Object.keys(errors).length === 0 ? null : errors;
+        const {error} = Joi.validate(this.state.account, this.schema, options);
+        if (!error) return null;
+
+        const errors ={};
+        
+        // Line 22 and 23 - map na array into an object
+        for (let item of error.details)
+        errors[item.path[0]] = item.message;
+        return errors;
     };
     handleOnSubmit = (event) =>{
         event.preventDefault();
@@ -27,10 +35,24 @@ class LoginForm extends Component {
         console.log('Submitted')
         
     };
+     validateProperty = ({name, value}) => {
+        if (name === 'username' ) {
+            if (value.trim() === '') return 'Username is required.';
+
+        }
+        if (name === 'password'){
+            if (value.trim() === '') return 'Passoword is required.';
+        }
+     };
     handleChange = ({currentTarget: input}) => {
+        const errors ={...this.state.errprs};
+        const errorMessage = this.validateProperty(input);
+        if (errorMessage) errors[input.name] = errorMessage;
+        else delete errors[input.name];
+
         const account = {...this.state.account}
         account[input.name] = input.value;
-        this.setState( {account} );
+        this.setState( {account, errors} );
     };
 
 
